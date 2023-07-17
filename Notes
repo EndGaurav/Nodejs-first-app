@@ -1,0 +1,112 @@
+package.json = dependencies.
+package-lock.json = dependencies's denpendency
+CURD operations
+work: creating api which can fetch or get data from db.
+backend has three things 
+1. server
+2. db
+3. api
+route == endpoint
+api in simplest way: when we hit any api then some manipulation is happening on data.
+api is just a function and we set its routing in the backend.
+suppose: one server has some or many api and we host this server on localhost:5000
+
+===============Node js============================================================
+we can directly run our nodejs application on terminal without going to browser
+node index.js
+but when we are in our development phase then we don't want to run "node index.js" again and again for seeing changes.
+that's how "nodemon package" comes into the picture, once we start our nodemon we can see direct changes in our terminal.
+npm install -g nodemon
+nodemon index.js and enjoy it
+
+Primary goal in backend is, creating a server
+first we create server 
+then we listen on that server
+req.url --> we can access any url
+req.method --> we can access any method
+
+defaultly we can export only one variable. characteristics: we can import from any name. like import jethalal from "./userdefinedmod.js"
+for multiple export use {} instead of default
+undefeult variable we can export on the declaration also. like: export const myname1 = "something"
+and can be import all two which is default and undefault like object and then extract the value.
+import * as myobj from "file/path" 
+
+with nodejs our code looks more complex for simplifying this we will install module called express.
+
+==============Express js=============================================================
+npm install express
+Express? getting same work like node js but in short syntax.
+by convention we put server name equals to app.
+"scripts": {
+"start": "node index.js",
+"dev": "nodemon index.js"
+}
+npm run dev or npm run start || npm start (important)
+
+
+===============EJS=================================================
+js embebded
+<>javascript<> : used for rendering purposes.
+but how to embed js in index.html
+<%=myNameVaribale %>
+in starting <%= %>
+defualt folder is: views
+now. how to serve static data like html, css, js file or others. 
+we store those in public directory.
+difference between passing message and locals.message 
+if we pass message variable alone. and if this message has not any value then it will show you like a error because he does not have any error.
+if we pass locals.message and if our variable does not have any value even then he will show any error and will act like a normal.  
+
+we done this using static method from express module
+express.static() 
+path is another module, we import it because it is module.
+path.resolve() --> present current directory
+path.join() --> can join multiple path 
+if current directory is: /sys/fs
+path.join(path.resolve(), "cgroup") --> /sys/fs/cgroup
+
+when we wanna serve static folder, the path to that file is called middleware
+path.join(path.resolve(), "cgroup") --> middleware
+for passing middleware we use: app.use(middleware)
+listen carefully: we set this absolute path so we can use it in our server in simple manner.
+re.sendFile("index.html")
+
+listen carefully: 
+Now we know how to embed js in html using ejs 
+Now we know how to serve static file like css, js.
+for that we just use path module using it we set current directory of the static file. by convention that direcrtory known as public.
+
+
+============================From Project==================================================================
+we pass middleware using .use()
+
+
+===============================Mongo DB=======================================================
+document = 1 entry
+collection of document is called collection.
+for connecting mongo db to nodejs we use package called mongoose.
+listen
+first we set the scehema or predefined the schema means what what fields will come in the db.
+model is nothing but fancy name of calling collection.
+flow
+first we connect db 
+then we set schema
+then we create model with providing schema 
+then we put data into model using create function
+
+
+=============================Authentication===============================================
+cookie has expire time.
+how to access the cookies in your codebase using package called cookie-parser.
+how next() function works: when next function get executed then it immediately call its next call back function  
+Now we are using mongoDB and in cookie per login we are storing a model's object and as we know that each object has its unique id so that id which we are storing as cookie or a reference of individual user.
+Because we cannot openly store the id or identity of a user because that is sansitive info about user so that's why we are using JWT(JSON web token) token.
+This eliminates the need for the system to store your credentials or make frequent database lookups to verify your identity. Instead, the system can simply validate the token's signature and check the information contained within to grant you access.
+jsonwebtoken is package so we will install it.
+
+Payload:  the payload in the context of a JWT token is like a digital envelope that carries additional information or data.
+Imagine you have a JWT token that represents your identity when you log in to a social media app. The payload within that token might contain information such as your username, user ID, and maybe even your role (e.g., "user" or "admin"). These are the claims or data that the app needs to recognize and validate who you are.
+
+listen when as database administrator if you can see credentials, why people will trust you or register their credentials. so will have to scurely store their password using one of the cryptography technique known as hashing.
+package: bcrypt package is used for hashing. so install it now. 
+
